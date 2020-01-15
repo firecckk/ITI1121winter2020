@@ -1,0 +1,76 @@
+#!/bin/bash
+# Created: Jan.14 2020
+# Written by firecckk
+
+cd `dirname $0`
+
+# To check if command exists
+haveCMD(){
+	for i; do
+		type $i >/dev/null 2>&1 ||  \
+			{ echo "$i missing."; return 1;}
+	done
+}
+
+# For the correct dir, User should have:
+File="README.txt Q5.java Q6.java Q3_ArrayInsertionDemo.java Q3_SquareArray.java Q3_AverageDemo.java Q3_ReverseSortDemo.java"
+haveFile(){
+	for i; do
+		if [ ! -f $i ]; then
+			echo "*** Warning: ${i} not found."
+			echo Is this the correct directory?
+			while true; do
+				read -p "press i (ignore) to ignore this warning or a (abort) to give up installation." -n 1 -r
+				[ ${REPLY}d == "a"d ] && { echo ; echo $i missing ; return 1; }
+				[ ${REPLY}d == "i"d ] && { echo ; break; }
+				echo 
+			done
+			echo 
+		fi
+        done
+}
+
+install(){
+	# check dependencies
+	haveCMD curl java zip || abort
+	# check dir, user may be wrong.
+	haveFile $File || abort
+	# download jars libs
+	#curl -LJO https://github.com/firecckk/ITI1121winter2020/raw/master/statics/hamcrest-core-1.3.jar
+	#curl -LJO https://github.com/firecckk/ITI1121winter2020/raw/master/statics/junit-4.13.jar
+	# download my scripts
+	curl -LJO https://github.com/firecckk/ITI1121winter2020/raw/master/statics/01.zip
+	#unzip
+	unzip ./01.zip
+	mv 01 lab1tests
+	rm 01.zip
+	echo "cd `dirname $0`" >> test
+	echo "bash ./lab1tests/test" >> test
+	chmod +x test
+	touch ./lab1tests/.installed
+}
+
+abort(){
+	echo "Aborting."; exit 1;
+}
+
+### MAIN
+clear
+echo 
+echo "***lab1tests_installer running***"
+if [ ! -f ./lab1tests/.installed ]; then
+	install || abort
+fi
+if [ $1d = "--uninstall"d ]; then
+	echo "* uninstalling ..."
+	rm -rf ./lab1tests
+	rm test
+	rm lab1tests_installer
+	echo "* finished"
+	exit 0
+fi
+echo "* lab1tests has been installed."
+echo "* To run Junit tests, click test or run 'bash test'"
+echo "* To uninstall lab1tests, just delete lab1tests_installer,test and lab1tests folder, or you can run 'bash lab1tests_installer --uninstall'."
+
+echo "--------------------------------"
