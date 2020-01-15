@@ -1,7 +1,7 @@
 # How to use lab1tester_installer (for Mac/Linux user)
 
 ### Download & Install
-1. Download this [script](https://drive.google.com/file/d/1daVEPeSjPQIW0RfJa20Zxu8ruNXO957P/view?usp=sharing) from google drive.
+1. Download this script from [google drive](https://drive.google.com/file/d/1daVEPeSjPQIW0RfJa20Zxu8ruNXO957P/view?usp=sharing) or from [github](https://raw.githubusercontent.com/firecckk/ITI1121winter2020/master/lab1/lab1tests_installer).
 2. Copy the script to your lab1 folder where your README.txt is.
 3. In your terminal, Give executable permission to this script:
 
