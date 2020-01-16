@@ -34,7 +34,13 @@ After installatioin, you just need to click 'test' file to run Junit test progra
 
 `bash test`
 
+![lab1test3](https://github.com/firecckk/ITI1121winter2020/blob/master/statics/lab1test3.png?raw=true)
+
 You will see all the test results after the program finished.
+
+if you get like this (Failed 0), congratulations, you get all grades.
+
+![lab1test4](https://github.com/firecckk/ITI1121winter2020/blob/master/statics/lab1test4.png?raw=true)
 
 ---
 
