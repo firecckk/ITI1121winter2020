@@ -3,6 +3,8 @@
 #
 cd `dirname $0`
 
+TEST_CASES="https://github.com/firecckk/ITI1121winter2020/raw/master/statics/JUnit-a1.zip"
+TEST="TicTacToeGameTest"
 JARS=./jar_files
 JUNIT=$JARS/junit-4.13.jar:$JARS/hamcrest-core-1.3.jar:.
 
@@ -14,6 +16,7 @@ if [ $1d = "clean"d ]; then
 	exit 0
 fi
 
+# check 
 # check jar files
 if [ ! -d build ]; then
         echo "** creating $JARS directory."
@@ -48,7 +51,7 @@ fi
 if [ ! -d build ]; then
 	mkdir build
 fi
-javac -d ./build -cp ../:$JUNIT ./TicTacToeGameTest.java 
+javac -d ./build -cp ../:$JUNIT $TEST.java
 if [ ! $? == 0 ]; then
 	echo
 	echo "** Error: compiling failed!"
@@ -57,7 +60,7 @@ if [ ! $? == 0 ]; then
 fi
 
 # Test
-java -cp ./build:$JUNIT TicTacToeGameTest > ./build/RESULT.txt
+java -cp ./build:$JUNIT $TEST > ./build/RESULT.txt
 
 cat ./build/RESULT.txt
 
