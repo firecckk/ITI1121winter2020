@@ -1,0 +1,78 @@
+#!/bin/bash
+# Usage: test [ clean ]
+#
+cd `dirname $0`
+
+JARS=./jar_files
+JUNIT=$JARS/junit-4.13.jar:$JARS/hamcrest-core-1.3.jar:.
+
+# Main(args)
+clear
+if [ $1d = "clean"d ]; then
+	echo Remove ./build
+	rm -rf ./build
+	exit 0
+fi
+
+# check jar files
+if [ ! -d build ]; then
+        echo "** creating $JARS directory."
+	mkdir $JARS
+fi
+
+if [ ! -f $JARS/hamcrest-core-1.3.jar ]; then
+	echo
+	echo "** Warning: hamcrest-core-1.3.jar missing"
+	echo "** downloading ..."
+	curl -LJ -o $JARS/hamcrest-core-1.3.jar https://github.com/firecckk/ITI1121winter2020/raw/master/statics/hamcrest-core-1.3.jar
+	if [ ! $? == 0 ]; then
+		echo "** Error: download failed!"
+		echo "** exiting..."
+		exit 1
+	fi
+fi
+
+if [ ! -f $JARS/junit-4.13.jar ]; then
+        echo 
+	echo "** Warning: hamcrest-core-1.3.jar missing"
+        echo "** downloading ..."
+	curl -LJ -o $JARS/junit-4.13.jar https://github.com/firecckk/ITI1121winter2020/raw/master/statics/junit-4.13.jar
+        if [ ! $? == 0 ]; then
+                echo "** Error: download failed!"
+                echo "** exiting..."
+                exit 1
+        fi      
+fi
+
+# compile
+if [ ! -d build ]; then
+	mkdir build
+fi
+javac -d ./build -cp ../:$JUNIT ./TicTacToeGameTest.java 
+if [ ! $? == 0 ]; then
+	echo
+	echo "** Error: compiling failed!"
+	echo "** exiting..."
+	exit 1
+fi
+
+# Test
+java -cp ./build:$JUNIT TicTacToeGameTest > ./build/RESULT.txt
+
+cat ./build/RESULT.txt
+
+res=`cat ./build/RESULT.txt | grep "Number of tests run:" | tr -cd "[0-9\n]"`
+sum=0
+for i in $res; do
+	sum=$(( $sum+$i ))
+done
+echo Tested: $sum
+
+res=`cat ./build/RESULT.txt | grep "Number of tests that failed:" | tr -cd "[0-9\n]"`
+sum=0
+for i in $res; do
+        sum=$(( $sum+$i ))
+done    
+echo Failed: $sum
+echo
+
