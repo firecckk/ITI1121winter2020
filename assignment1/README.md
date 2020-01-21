@@ -8,6 +8,14 @@
 ## command to run this script:
 `bash ./JUnit/a1test`
 
+![a1-1](https://github.com/firecckk/ITI1121winter2020/raw/master/statics/a1-1.png)
+
+if you see like this picture below, 0 Fail, you are OK with this assignment.
+
+![a1-2](https://github.com/firecckk/ITI1121winter2020/raw/master/statics/a1-2.png)
+
 ## clean compiled .class file:
 `bash ./Junit/a1test clean`
+
+
 
