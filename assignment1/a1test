@@ -3,9 +3,11 @@
 #
 cd `dirname $0`
 
-TEST_CASES="https://github.com/firecckk/ITI1121winter2020/raw/master/statics/JUnit-a1.zip"
+#TEST_CASES_URL="http://www.eecs.uottawa.ca/~gvj/Courses/ITI1121/assignments/01/a1_3000000_3000001.zip"
+
 TEST="TicTacToeGameTest"
-JAVAS="../CellValue.java ../StudentInfo.java ../TicTacToeGame.java ../GameState.java ../TicTacToe.java $TEST.java"
+STUDENT_JAVAS="../CellValue.java ../StudentInfo.java ../TicTacToeGame.java ../GameState.java ../TicTacToe.java"
+JAVAS="$STUDENT_JAVAS $TEST.java"
 
 JARS=./jar_files
 JUNIT=$JARS/junit-4.13.jar:$JARS/hamcrest-core-1.3.jar:.
@@ -18,7 +20,22 @@ if [ $1d = "clean"d ]; then
 	exit 0
 fi
 
-# check 
+# check dependencies
+for i in $STUDENT_JAVAS; do
+	[ -f $i ] || { echo "** $i missing!"; exit 1;}
+done
+	[ -f $TEST.java ] || {
+		echo "** Test cases missing: $TEST.java"
+		echo "** Please check"
+		exit 1
+		#echo "** Downloading ..."
+		#curl -LJ -o JUNIT.zip $TEST_CASES_URL
+		#unzip -o JUNIT.zip
+		#mv JUNIT/* ./
+		#rm -rf ./JUNIT ./JUNIT.zip
+	}
+
+
 # check jar files
 if [ ! -d build ]; then
         echo "** creating $JARS directory."
