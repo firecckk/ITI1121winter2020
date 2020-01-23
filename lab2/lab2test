@@ -30,7 +30,7 @@ done
 		#exit 1
 		echo "** Downloading ..."
 		curl -LJ -o JUNIT.zip $TEST_CASES_URL
-		unzip -o JUNIT.zip
+		unzip -o JUNIT.zip -x __MACOSX/*
 		mv JUNIT/* ./
 		rm -rf ./JUNIT ./JUNIT.zip
 		echo -e "success"
