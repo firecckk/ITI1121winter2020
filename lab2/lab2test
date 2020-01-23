@@ -6,7 +6,7 @@ cd `dirname $0`
 TEST_CASES_URL="http://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab2_template/JUnit.zip"
 
 TEST="TestL2"
-STUDENT_JAVAS="../Combination.java ../DoorLock.java ../SecurityAgent.java ../Test.java"
+STUDENT_JAVAS="../Combination.java ../DoorLock.java"
 JAVAS="$STUDENT_JAVAS $TEST.java"
 
 JARS=./jar_files
