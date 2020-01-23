@@ -3,6 +3,8 @@
 #
 cd `dirname $0`
 
+TEST_CASES_URL="http://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab2_template/JUnit.zip"
+
 TEST="TestL2"
 STUDENT_JAVAS="../Combination.java ../DoorLock.java ../SecurityAgent.java ../Test.java"
 JAVAS="$STUDENT_JAVAS $TEST.java"
@@ -24,13 +26,14 @@ for i in $STUDENT_JAVAS; do
 done
 	[ -f $TEST.java ] || {
 		echo "** Test cases missing: $TEST.java"
-		echo "** Please check"
-		exit 1
-		#echo "** Downloading ..."
-		#curl -LJ -o JUNIT.zip $TEST_CASES_URL
-		#unzip -o JUNIT.zip
-		#mv JUNIT/* ./
-		#rm -rf ./JUNIT ./JUNIT.zip
+		#echo "** Please check"
+		#exit 1
+		echo "** Downloading ..."
+		curl -LJ -o JUNIT.zip $TEST_CASES_URL
+		unzip -o JUNIT.zip
+		mv JUNIT/* ./
+		rm -rf ./JUNIT ./JUNIT.zip
+		echo -e "success"
 	}
 
 
